@@ -1,0 +1,52 @@
+<html xmlns:th= "http://www.thymeleaf.or g" >
+<head>
+<meta charset="UTF-8">
+ <title>Insert New Employee</title> 
+ <head>
+<script>
+function validateForm() {
+  var Firstname = document.forms["myForm"]["last_name"].value;
+  var salary = document.forms["myForm"]["department.salary"].value;
+  var department_name = document.forms["myForm"]["department.department_name"].value;
+  var job_title = document.forms["myForm"]["department.job_title"].value;
+  var r=/^[0-9]+$/;
+
+  if (Firstname == "") {
+    alert("First name must be filled out");
+    return false;
+  } 
+
+  if (department_name == "") {
+	    alert(" Department name must be filled out");
+	    return false;
+	  } 
+  if (job_title == "") {
+	    alert(" Job title must be filled out");
+	    return false;
+ 	 }
+   if (salary.match(r)) {
+	   alert('Salary has accepted');
+		 return true;
+	 }
+   else
+   {
+	   alert('Please input numeric characters only');
+		  
+	   return false;
+	   } 
+   }
+</script>
+ </head> 
+ <body> 
+<form name="myForm" th:object="${newEmployee}" th:action="@{/update/{id}(id=${newEmployee.id})}"  onsubmit="return validateForm()" method=POST>
+<!-- attribute to the submit button, prevents validation on form elements -->
+First Name: <input name="first_name" size="20" th:field="*{first_name}" required><br />
+Last Number: <input name="last_name" size="20" th:field="*{last_name}"><br />
+Salary: <input name="department.salary" size="20" th:field="*{department.salary}"><br />
+Department: <input name="department.department_name" size="20" th:field="*{department.department_name}"><br />
+Job Title: <input name="department.job_title" size="20" th:field="*{department.job_title}"><br />
+<input name="Submit" type="submit" value="Add New Employee" />
+</form>
+<a href="../viewAll">View All Employees</a>
+</body>
+</html>

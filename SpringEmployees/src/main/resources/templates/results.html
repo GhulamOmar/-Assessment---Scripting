@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>View All Employee</title>
+</head>
+<body>
+<form>
+<table>
+<tr th:each="currentEmployee: ${employees}">
+	<td th:text="${currentEmployee.id}" />
+	<td th:text="${currentEmployee.last_name}" />
+	<td th:text="${currentEmployee.first_name}" />
+	<td th:text="${currentEmployee.department.salary}" />
+	<td th:text="${currentEmployee.department.department_name}" />
+	<td><a th:href="@{/edit/{id}(id=${currentEmployee.id})}">Edit</a></td>
+	<td><a th:href="@{/delete/{id}(id=${currentEmployee.id})}">Delete</a></td>
+	</tr>
+</table>
+</form>
+<a href="../inputEmployee">Add a new Employee</a>
+</body>
+</html>
